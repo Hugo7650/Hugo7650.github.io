@@ -32,6 +32,8 @@ let TouchHold=[-1,-1,-1,-1];
 let LaserTime=150;
 let offset=-40;
 let Scale=100;
+let screenWidth=600;
+let screenHeight=800;
 let Result=[0,0,0,0,0,0,0];
 let FastCount=0,SlowCount=0,MaxCombo=0;
 const bindKey=[68,70,74,75];
@@ -40,6 +42,16 @@ let ctx=c.getContext("2d");
 let linear = ctx.createLinearGradient(75,850,75,500);
 linear.addColorStop(0,"#9ED3FF");
 linear.addColorStop(1,"rgba(0,0,0,0)");
+
+if(window.innerWidth>window.innerHeight) {
+	screenWidth=window.innerWidth*0.6;
+	screenHeight=window.innerHeight;
+}
+else {
+	screenWidth=window.innerWidth;
+	screenHeight=window.innerHeight;
+}
+
 function parseOsuString(data) {
     let regex = {
         section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
@@ -198,9 +210,9 @@ function calcPOS(tt) {
         MpB=BPMs[content["TimingPoints"][i][8]][1];
         if(content["TimingPoints"][i][1]>0)percent=1;else percent=-content["TimingPoints"][i][1]/100;
         if(i===TPnums-1||content["TimingPoints"][i+1][0]>time)
-            c=(time-content["TimingPoints"][i][0])*800/(scrollDuration*MpB*percent/baseMpB);
+            c=(time-content["TimingPoints"][i][0])*screenHeight/(scrollDuration*MpB*percent/baseMpB);
         else
-            c=(content["TimingPoints"][i+1][0]-content["TimingPoints"][i][0])*800/(scrollDuration*MpB*percent/baseMpB);
+            c=(content["TimingPoints"][i+1][0]-content["TimingPoints"][i][0])*screenHeight/(scrollDuration*MpB*percent/baseMpB);
         tpos=tpos+c;
         if(i===TPnums-1||content["TimingPoints"][i+1][0]>time)break;
     }
@@ -208,9 +220,9 @@ function calcPOS(tt) {
         MpB=BPMs[content["TimingPoints"][i][8]][1];
         if(content["TimingPoints"][i][1]>0)percent=1;else percent=-content["TimingPoints"][i][1]/100;
         if(i===TPnums-1||content["TimingPoints"][i+1][0]>tt)
-            c=(tt-content["TimingPoints"][i][0])*800/(scrollDuration*MpB*percent/baseMpB);
+            c=(tt-content["TimingPoints"][i][0])*screenHeight/(scrollDuration*MpB*percent/baseMpB);
         else
-            c=(content["TimingPoints"][i+1][0]-content["TimingPoints"][i][0])*800/(scrollDuration*MpB*percent/baseMpB);
+            c=(content["TimingPoints"][i+1][0]-content["TimingPoints"][i][0])*screenHeight/(scrollDuration*MpB*percent/baseMpB);
         pos=pos+c;
         if(i===TPnums-1||content["TimingPoints"][i+1][0]>tt)break;
     }
@@ -220,8 +232,8 @@ function calcPOS(tt) {
 function bt_start_onclick() {
     document.getElementById("startdiv").setAttribute("style","display: none;");
     Scale=Number(document.getElementById("inputScale").value);
-    document.getElementById("canvasdiv").setAttribute("style","width: "+String(600*Scale/100)+"px; margin:0 auto;");
-    c.setAttribute("style","border:4px solid #7f7f7f; background: black; "+"width: "+String(600*Scale/100)+"px;");
+    document.getElementById("canvasdiv").setAttribute("style","width: "+String(screenWidth*Scale/100)+"px; height: "+String(screenHeight*Scale/100)+"px; margin:0 auto;");
+    c.setAttribute("style","border:4px solid #7f7f7f; background: black; "+"width: "+String(screenWidth*Scale/100)+"px; height: "+String(screenHeight*Scale/100)+"px;");
     scrollDuration=Number(document.getElementById("scrollDurationInput").value);
     offset=Number(document.getElementById("inputOffset").value);
     if(document.getElementById("baseBPM").value!=="")baseMpB=60000/Number(document.getElementById("baseBPM").value);else{
@@ -511,9 +523,9 @@ function draw_Bar_Line() {
             a=true;
             if(tt<time)continue;
             let pos=calcPOS(tt);
-            if(pos>800+noteThick)break;
+            if(pos>screenHeight+noteThick)break;
             ctx.fillStyle="#FF0000";
-            ctx.fillRect(0,800-pos+noteThick,600,2);
+            ctx.fillRect(0,screenHeight-pos+noteThick,screenWidth,2);
             a=false;
         }
         if(a)break;
@@ -633,20 +645,20 @@ function draw_Notes() {
 
             ctx.lineWidth=4;
             let pos=calcPOS(Objs[LineQueue[Col][i]]["StartTime"]);
-            if(pos>800+noteThick)break;
+            if(pos>screenHeight+noteThick)break;
             if(Objs[LineQueue[Col][i]]["EndTime"]!==0){
                 let pos2=calcPOS(Objs[LineQueue[Col][i]]["EndTime"]);
                 if(pos2<0){
                     continue;
                 }
-                ctx.fillRect(L,800-pos2,150,pos2-pos+noteThick);
-                ctx.strokeRect(L+2,800-pos2+2,150-4,pos2-pos+noteThick-4);
+                ctx.fillRect(L,screenHeight-pos2,150,pos2-pos+noteThick);
+                ctx.strokeRect(L+2,screenHeight-pos2+2,150-4,pos2-pos+noteThick-4);
 
             }else{
                 if(pos<0){
                     continue;
                 }
-                ctx.fillRect(L,800-pos,150,noteThick);
+                ctx.fillRect(L,screenHeight-pos,150,noteThick);
             }
         }
     }
