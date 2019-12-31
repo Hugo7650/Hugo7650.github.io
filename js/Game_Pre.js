@@ -276,7 +276,7 @@ function processTouchstart(e) {
     }
     if(time<0)return;
     if(!Finded)return;
-	hitSound.cloneNode().play(); 
+	#hitSound.cloneNode().play(); 
     if(null != audio1&&!audio1.ended&&!audio1.paused) {
         LineHold[Key]=-1;
         let i=LineQueueHead[Key];
