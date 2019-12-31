@@ -267,7 +267,7 @@ function processTouchstart(e) {
     let ID=e.changedTouches[0].identifier;
     let X=e.changedTouches[0].clientX-c.offsetLeft;
     let Key=0,Finded=false;
-    if(X<=150*Scale/100)Key=0;else if(X<=300*Scale/100)Key=1;else if(X<=450*Scale/100)Key=2;else Key=3;
+    if(X<=screenWidth/4*Scale/100)Key=0;else if(X<=screenWidth/2*Scale/100)Key=1;else if(X<=screenWidth/4*3*Scale/100)Key=2;else Key=3;
     if (!keyAsync[Key]) {
         keyAsync[Key] = true;
         keyLaserTime[Key] = -1;
@@ -276,6 +276,7 @@ function processTouchstart(e) {
     }
     if(time<0)return;
     if(!Finded)return;
+	hitSound.cloneNode().play(); 
     if(null != audio1&&!audio1.ended&&!audio1.paused) {
         LineHold[Key]=-1;
         let i=LineQueueHead[Key];
