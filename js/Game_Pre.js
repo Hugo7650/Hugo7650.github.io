@@ -42,7 +42,7 @@ let ctx=c.getContext("2d");
 let linear = ctx.createLinearGradient(75,850,75,500);
 linear.addColorStop(0,"#9ED3FF");
 linear.addColorStop(1,"rgba(0,0,0,0)");
-
+let hitSound = document.getElementById("pew");
 if(window.innerWidth>window.innerHeight) {
 	screenWidth=window.innerWidth*0.4;
 	screenHeight=window.innerHeight*0.95;
@@ -404,6 +404,7 @@ function processKeydown(e) {
     }
     if(time<0)return;
     if(!Finded)return;
+	hitSound.cloneNode().play(); 
     if(null != audio1&&!audio1.ended&&!audio1.paused) {
         LineHold[Key]=-1;
         let i=LineQueueHead[Key];
@@ -852,6 +853,7 @@ if(request){
 }else{
     alert("error");
 }
+audio1.volume=0.5;
 audio1.play();
 audio1.pause();
 document.getElementById("osudiv").setAttribute("style","display:none;");
