@@ -44,12 +44,12 @@ linear.addColorStop(0,"#9ED3FF");
 linear.addColorStop(1,"rgba(0,0,0,0)");
 
 if(window.innerWidth>window.innerHeight) {
-	screenWidth=window.innerWidth*0.6;
-	screenHeight=window.innerHeight;
+	screenWidth=window.innerWidth*0.4;
+	screenHeight=window.innerHeight*0.95;
 }
 else {
-	screenWidth=window.innerWidth;
-	screenHeight=window.innerHeight;
+	screenWidth=window.innerWidth*0.95;
+	screenHeight=window.innerHeight*0.95;
 }
 
 function parseOsuString(data) {
