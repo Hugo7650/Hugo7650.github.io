@@ -52,17 +52,6 @@ else {
 	screenHeight=window.innerHeight*0.95;
 }
 
-function requestFullScreen() {
-    var de = document.documentElement;
-    if (de.requestFullscreen) {
-        de.requestFullscreen();
-    } else if (de.mozRequestFullScreen) {
-        de.mozRequestFullScreen();
-    } else if (de.webkitRequestFullScreen) {
-        de.webkitRequestFullScreen();
-    }
-}
-requestFullScreen();
 function parseOsuString(data) {
     let regex = {
         section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
