@@ -144,14 +144,17 @@ function readOsu() {
         document.getElementById("audiodiv").setAttribute("style","text-align: center; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0; height: 0px;");
         content = this.result;
         content = parseOsuString(content);
-        for(let i=0;i<TPnums;i++)if(content["TimingPoints"][i][1]<0)content["TimingPoints"][i][8]=BPMnums-1;else{
-            content["TimingPoints"][i][8]=BPMnums;
-            BPMs[BPMnums]={};
-            BPMs[BPMnums][0]=content["TimingPoints"][i][0];
-            BPMs[BPMnums][1]=content["TimingPoints"][i][1];
-            BPMs[BPMnums][2]=content["TimingPoints"][i][2];
-            BPMnums++;
-        }
+        for(let i=0;i<TPnums;i++)
+			if(content["TimingPoints"][i][1]<0)
+				content["TimingPoints"][i][8]=BPMnums-1;
+			else{
+				content["TimingPoints"][i][8]=BPMnums;
+				BPMs[BPMnums]={};
+				BPMs[BPMnums][0]=content["TimingPoints"][i][0];
+				BPMs[BPMnums][1]=content["TimingPoints"][i][1];
+				BPMs[BPMnums][2]=content["TimingPoints"][i][2];
+				BPMnums++;
+			}
         for(let i=0;i<HOnums;i++){
             Objs[i]={};
             Objs[i]["Key"]=Math.floor(content["HitObjects"][i][0]/(512/4));
@@ -524,9 +527,9 @@ function draw_Bar_Line() {
             a=true;
             if(tt<time)continue;
             let pos=calcPOS(tt);
-            if(pos>screenHeight+noteThick)break;
+            if(pos>800+noteThick)break;
             ctx.fillStyle="#FF0000";
-            ctx.fillRect(0,screenHeight-pos+noteThick,screenWidth,2);
+            ctx.fillRect(0,800-pos+noteThick,600,2);
             a=false;
         }
         if(a)break;
@@ -646,20 +649,20 @@ function draw_Notes() {
 
             ctx.lineWidth=4;
             let pos=calcPOS(Objs[LineQueue[Col][i]]["StartTime"]);
-            if(pos>screenHeight+noteThick)break;
+            if(pos>800+noteThick)break;
             if(Objs[LineQueue[Col][i]]["EndTime"]!==0){
                 let pos2=calcPOS(Objs[LineQueue[Col][i]]["EndTime"]);
                 if(pos2<0){
                     continue;
                 }
-                ctx.fillRect(L,screenHeight-pos2,150,pos2-pos+noteThick);
-                ctx.strokeRect(L+2,screenHeight-pos2+2,150-4,pos2-pos+noteThick-4);
+                ctx.fillRect(L,800-pos2,150,pos2-pos+noteThick);
+                ctx.strokeRect(L+2,800-pos2+2,150-4,pos2-pos+noteThick-4);
 
             }else{
                 if(pos<0){
                     continue;
                 }
-                ctx.fillRect(L,screenHeight-pos,150,noteThick);
+                ctx.fillRect(L,800-pos,150,noteThick);
             }
         }
     }
