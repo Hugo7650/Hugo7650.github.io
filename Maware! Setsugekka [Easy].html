@@ -17,7 +17,7 @@
 <section>
     <span id="filename" style="display: none;">Songs\Maware! Setsugekka\Maware! Setsugekka [PROGUY's 4K Easy].osu</span>
     <div style="text-align: center; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0; height: 0px;">
-        <audio id="audioPlayer" src="Songs/Maware! Setsugekka/Harada Hitomi, Kayano Ai & Ogura Yui - Maware! Setsugekka.mp3" preload="auto"></audio>
+        <audio id="audioPlayer" src="Songs/Maware! Setsugekka/Harada Hitomi, Kayano Ai & Ogura Yui - Maware! Setsugekka.mp3" muted="true" preload="auto"></audio>
 		<audio id="pew" src="Songs/Soft Hit Normal.wav"></audio>
     </div>
     <div id="osudiv" style="text-align: center; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0; height: 0px;">
@@ -31,13 +31,15 @@
     <div id="startdiv" style="display: none;">
         <span>页面缩放(百分比)</span>
         <input type="text" id="inputScale" value="100" style="text-align: center;"><br>
-        <input type="submit" name="b1" value="开始" onClick="bt_start_onclick()"><br>
         <span>输入下落滚动时间(ms):</span>
         <input type="text" id="scrollDurationInput" value="600" style="text-align: center;"><br>
         <span>输入匹配BPM(默认MAX-FIX):</span>
         <input type="text" id="baseBPM" value="" style="text-align: center;"><br>
         <span>音乐偏移(负提前，正延后):</span>
         <input type="text" id="inputOffset" value="-40" style="text-align: center;"><br>
+        <span>加载进度:</span>
+        <progress id="progress" value="0" max="100">完成</progress><br>
+        <input id="begin" type="submit" name="b1" value="开始" disabled="true" onClick="bt_start_onclick()"><br>
     </div>
     <div id="canvasdiv" style="display: none;"><canvas id="myCanvas" width="600" height="800" style="border:4px solid #7f7f7f; background: black;">
         您的浏览器不支持 HTML5 canvas 标签。

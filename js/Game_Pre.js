@@ -52,6 +52,24 @@ else {
 	screenHeight=window.innerHeight*0.95;
 }
 
+audio1
+let interval = setInterval(function() {
+    let buffered = audio1.buffered,loaded;
+    if (buffered.length) {
+        // 获取当前缓冲进度
+        loaded = 100 * buffered.end(0) / audio1.duration;
+        // 渲染缓冲条的样式
+        document.getElementById("progress").value = loaded;
+        audio1.currentTime = buffered.end(0);
+        if (loaded >= 100) {
+            audio1.currentTime = 0;
+            audio1.muted = false;
+            document.getElementById("begin").disabled=false;
+            clearInterval(interval);
+        }
+    }
+}, 10);
+
 function parseOsuString(data) {
     let regex = {
         section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
