@@ -236,7 +236,7 @@ function bt_start_onclick() {
     document.getElementById("startdiv").setAttribute("style","display: none;");
     Scale=Number(document.getElementById("inputScale").value);
     document.getElementById("canvasdiv").setAttribute("style","width: "+String(screenWidth*Scale/100)+"px; height: "+String(screenHeight*Scale/100)+"px; margin:0 auto;");
-    c.setAttribute("style","border:4px solid #7f7f7f; background: black; "+"width: "+String(screenWidth*Scale/100)+"px; height: "+String(screenHeight*Scale/100)+"px;");
+    c.setAttribute("style","border:4px solid #7f7f7f; background: rgba(0, 0, 0, 0.7); "+"width: "+String(screenWidth*Scale/100)+"px; height: "+String(screenHeight*Scale/100)+"px;");
     scrollDuration=Number(document.getElementById("scrollDurationInput").value);
     offset=Number(document.getElementById("inputOffset").value);
     if(document.getElementById("baseBPM").value!=="")baseMpB=60000/Number(document.getElementById("baseBPM").value);else{
