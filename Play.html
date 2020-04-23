@@ -6,19 +6,26 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
 </head>
-<body bgcolor="black" style="overflow:hidden;">
+<body id="background" style="overflow:hidden;background-size:100%;background-color:black;">
 <style>
     span{
-        color: #FFFFFF
+        color: #FFFFFF;
+        background-color:black;
     }
 </style>
 <section>
-    <span id="filename" style="display: none;">Songs\Keyboard Latency Test\peppy - Keyboard Latency Test (haha5957) [Keyboard].osu</span>
+    <span id="filename" style="display: none;"></span>
     <div style="text-align: center; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0; height: 0px;">
-        <audio id="audioPlayer" src="Songs/Keyboard Latency Test/offsetfinder.mp3" muted="true" preload="auto"></audio>
+        <audio id="audioPlayer" muted="true" preload="auto"></audio>
         <audio id="pew" src="Songs/Soft Hit Normal.wav"></audio>
         <script>
             audio1=document.getElementById("audioPlayer");
+            let Difficult = getCookie("difficult");
+            audio1.src = "Songs/"+getCookie("music name")+"/audio.mp3";
+            let background = "Songs/"+getCookie("music name")+"/BG.jpg";
+            document.getElementById("background").background = "Songs/"+getCookie("music name")+"/BG.jpg";
+            document.getElementById("filename").textContent = "Songs/"+getCookie("music name")+"/"+getCookie("difficult")+".osu";
+
             let interval = setInterval(function() {
                 let buffered = audio1.buffered,loaded;
                 if (buffered.length) {
@@ -35,6 +42,18 @@
                     }
                 }
             }, 10);
+
+            function getCookie(cname)
+            {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) 
+                {
+                    var c = ca[i].trim();
+                    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+                }
+                return "";
+            }
         </script>
     </div>
     <div id="osudiv" style="display: none;">
@@ -70,17 +89,7 @@
             if (baseBPM !== "") document.getElementById("baseBPM").value = baseBPM;
             document.getElementById("inputOffset").value = inputOffset;
 
-            function getCookie(cname)
-            {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for(var i=0; i<ca.length; i++) 
-                {
-                    var c = ca[i].trim();
-                    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-                }
-                return "";
-            }
+            
         </script>
     </div>
     <div id="canvasdiv" style="display: none;"><canvas id="myCanvas" width="600" height="800" style="border:4px solid #7f7f7f; background: black;">

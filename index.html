@@ -18,37 +18,43 @@
 <section>
 <div style="display: table; margin: auto; font-size:1rem">
 	<div style="display: table-cell;vertical-align: middle;text-align: center">
-		<a href="Keyboard Latency Test.html">延迟测试</a>
+		<a href="Play.html" onClick="choose('Keyboard Latency Test', 'Easy')">延迟测试</a>
 		<br>
-		<a href="Cirno Break [BASIC].html">25 Cirno Break [BASIC]</a>
+		<a href="Play.html" onClick="choose('Cirno Break', 'Basic')">25 Cirno Break [Basic]</a>
 		<br>
-		<a href="Cirno Break [NOVICE].html">25 Cirno Break [NOVICE]</a>
+		<a href="Play.html" onClick="choose('Cirno Break', 'Novice')">25 Cirno Break [Novice]</a>
 		<br>
-		<a href="Cirno Break [Frim's ADVANCED].html">25 Cirno Break [Frim's ADVANCED]</a>
+		<a href="Play.html" onClick="choose('Cirno Break', 'Frim\'s Advanced')">25 Cirno Break [Frim's Advanced]</a>
 		<br>
-		<a href="Cirno Break [MEGA's EXHAUST].html">25 Cirno Break [MEGA's EXHAUST]</a>
+		<a href="Play.html" onClick="choose('Cirno Break', 'MEGA\'s Exhaust')">25 Cirno Break [MEGA's Exhaust]</a>
 		<br>
-		<a href="Yume To Hazakura [Easy].html">26 夢と葉桜 [Easy]</a>
+		<a href="Play.html" onClick="choose('夢と葉桜', 'Easy')">26 夢と葉桜 [Easy]</a>
 		<br>
-		<a href="Yume To Hazakura [Normal].html">26 夢と葉桜 [Normal]</a>
+		<a href="Play.html" onClick="choose('夢と葉桜', 'Normal')">26 夢と葉桜 [Normal]</a>
 		<br>
-		<a href="world.execute(me) [Easy].html">27 world.execute(me) [Easy]</a>
+		<a href="Play.html" onClick="choose('world.execute(me)', 'Easy')">27 world.execute(me) [Easy]</a>
 		<br>
-		<a href="world.execute(me) [Normal].html">27 world.execute(me) [Normal]</a>
+		<a href="Play.html" onClick="choose('world.execute(me)', 'Normal')">27 world.execute(me) [Normal]</a>
 		<br>
-		<a href="world.execute(me) [Advanced].html">27 world.execute(me) [Advanced]</a>
+		<a href="Play.html" onClick="choose('world.execute(me)', 'Advanced')">27 world.execute(me) [Advanced]</a>
 		<br>
-		<a href="Maware! Setsugekka [Easy].html">28 回レ! 雪月花 [Easy]</a>
+		<a href="Play.html" onClick="choose('回レ! 雪月花', 'Easy')">28 回レ! 雪月花 [Easy]</a>
 		<br>
-		<a href="Maware! Setsugekka [Normal].html">28 回レ! 雪月花 [Normal]</a>
+		<a href="Play.html" onClick="choose('回レ! 雪月花', 'Normal')">28 回レ! 雪月花 [Normal]</a>
 		<br>
-		<a href="Grievous Lady [Easy].html">29 Grievous Lady [Easy]</a>
+		<a href="Play.html" onClick="choose('Grievous Lady', 'Easy')">29 Grievous Lady [Easy]</a>
 		<br>
-		<a href="Grievous Lady [Normal].html">29 Grievous Lady [Normal]</a>
+		<a href="Play.html" onClick="choose('Grievous Lady', 'Normal')">29 Grievous Lady [Normal]</a>
 		<br>
 		<a href="Custom.html">自选谱面</a>
 	</div>
 </div>
 </section>
+<script>
+	function choose(name, difficult) {
+		document.cookie="music name="+name;
+		document.cookie="difficult="+difficult;
+	}
+</script>
 </body>
 </html>

@@ -52,24 +52,6 @@ else {
 	screenHeight=window.innerHeight*0.95;
 }
 
-audio1
-let interval = setInterval(function() {
-    let buffered = audio1.buffered,loaded;
-    if (buffered.length) {
-        // 获取当前缓冲进度
-        loaded = 100 * buffered.end(0) / audio1.duration;
-        // 渲染缓冲条的样式
-        document.getElementById("progress").value = loaded;
-        audio1.currentTime = buffered.end(0);
-        if (loaded >= 100) {
-            audio1.currentTime = 0;
-            audio1.muted = false;
-            document.getElementById("begin").disabled=false;
-            clearInterval(interval);
-        }
-    }
-}, 10);
-
 function parseOsuString(data) {
     let regex = {
         section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
@@ -251,6 +233,10 @@ function calcPOS(tt) {
     return Number(pos-tpos);
 }
 function bt_start_onclick() {
+    document.cookie="inputScale="+document.getElementById("inputScale").value;
+    document.cookie="scrollDurationInput="+document.getElementById("scrollDurationInput").value;
+    document.cookie="baseBPM="+document.getElementById("baseBPM").value;
+    document.cookie="inputOffset="+document.getElementById("inputOffset").value;
     document.getElementById("startdiv").setAttribute("style","display: none;");
     Scale=Number(document.getElementById("inputScale").value);
     document.getElementById("canvasdiv").setAttribute("style","width: "+String(screenWidth*Scale/100)+"px; height: "+String(screenHeight*Scale/100)+"px; margin:0 auto;");
@@ -557,54 +543,56 @@ function draw_Bar_Line() {
 function EndingScene() {
     ctx.clearRect(0, 0, c.width, c.height);
     ctx.save();
-    ctx.font = "bold 50px Arial";
+    ctx.font = "bold 40px Arial";
     ctx.textAlign = "start";
     ctx.textBaseline = "bottom";
     ctx.lineWidth=2;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.strokeStyle = "#7F7F7F";
+    ctx.fillText(getCookie("music name"), 50, 100);
+    ctx.strokeText(getCookie("music name"), 50, 100);
+    ctx.fillText("["+getCookie("difficult")+"]", 50, 150);
+    ctx.strokeText("["+getCookie("difficult")+"]", 50, 150);
     ctx.fillStyle = "#00FFFF";
     ctx.strokeStyle = "#007F7F";
-    ctx.fillText("300 : "+String(Result[0]), 50, 150-50);
-    ctx.strokeText("300 : "+String(Result[0]), 50, 150-50);
+    ctx.fillText("300 : "+String(Result[0]), 50, 200);
+    ctx.strokeText("300 : "+String(Result[0]), 50, 200);
     ctx.fillStyle = "#FFFF00";
     ctx.strokeStyle = "#7F7F00";
-    ctx.fillText("300 : "+String(Result[1]), 50, 215-50);
-    ctx.strokeText("300 : "+String(Result[1]), 50, 215-50);
+    ctx.fillText("300 : "+String(Result[1]), 50, 250);
+    ctx.strokeText("300 : "+String(Result[1]), 50, 250);
     ctx.fillStyle = "#00FF00";
     ctx.strokeStyle = "#007F00";
-    ctx.fillText("200 : "+String(Result[2]), 50, 280-50);
-    ctx.strokeText("200 : "+String(Result[2]), 50, 280-50);
+    ctx.fillText("200 : "+String(Result[2]), 50, 300);
+    ctx.strokeText("200 : "+String(Result[2]), 50, 300);
     ctx.fillStyle = "#0000FF";
     ctx.strokeStyle = "#00007F";
-    ctx.fillText("100 : "+String(Result[3]), 50, 345-50);
-    ctx.strokeText("100 : "+String(Result[3]), 50, 345-50);
+    ctx.fillText("100 : "+String(Result[3]), 50, 350);
+    ctx.strokeText("100 : "+String(Result[3]), 50, 350);
     ctx.fillStyle = "#7F7F7F";
     ctx.strokeStyle = "#3F3F3F";
-    ctx.fillText("50 : "+String(Result[4]), 50, 410-50);
-    ctx.strokeText("50 : "+String(Result[4]), 50, 410-50);
+    ctx.fillText("50 : "+String(Result[4]), 50, 400);
+    ctx.strokeText("50 : "+String(Result[4]), 50, 400);
     ctx.fillStyle = "#FF0000";
     ctx.strokeStyle = "#7F0000";
-    ctx.fillText("MISS : "+String(Result[5]+Result[6]), 50, 475-50);
-    ctx.strokeText("MISS : "+String(Result[5]+Result[6]), 50, 475-50);
+    ctx.fillText("MISS : "+String(Result[5]+Result[6]), 50, 450);
+    ctx.strokeText("MISS : "+String(Result[5]+Result[6]), 50, 450);
     ctx.fillStyle = "#0000FF";
     ctx.strokeStyle = "#00007F";
-    ctx.fillText("FAST : "+String(FastCount), 50, 540-50);
-    ctx.strokeText("FAST : "+String(FastCount), 50, 540-50);
+    ctx.fillText("FAST : "+String(FastCount), 50, 500);
+    ctx.strokeText("FAST : "+String(FastCount), 50, 500);
     ctx.fillStyle = "#FF0000";
     ctx.strokeStyle = "#7F0000";
-    ctx.fillText("SLOW : "+String(SlowCount), 50, 605-50);
-    ctx.strokeText("SLOW : "+String(SlowCount), 50, 605-50);
+    ctx.fillText("SLOW : "+String(SlowCount), 50, 550);
+    ctx.strokeText("SLOW : "+String(SlowCount), 50, 550);
     ctx.fillStyle = "#FFFFFF";
     ctx.strokeStyle = "#7F7F7F";
-    ctx.fillText("Score : "+String(Score)+"/"+String(EndScore), 50, 670-50);
-    ctx.strokeText("Score : "+String(Score)+"/"+String(EndScore), 50, 670-50);
-    ctx.fillStyle = "#FFFFFF";
-    ctx.strokeStyle = "#7F7F7F";
-    ctx.fillText("Combo : "+String(MaxCombo)+"/"+String(HOnums+LN), 50, 735-50);
-    ctx.strokeText("Combo : "+String(MaxCombo)+"/"+String(HOnums+LN), 50, 735-50);
-    ctx.fillStyle = "#FFFFFF";
-    ctx.strokeStyle = "#7F7F7F";
-    ctx.fillText("ACC : "+String(Math.round(Score/EndScore*10000)/100)+"%", 50, 800-50);
-    ctx.strokeText("ACC : "+String(Math.round(Score/EndScore*10000)/100)+"%", 50, 800-50);
+    ctx.fillText("Score : "+String(Score)+"/"+String(EndScore), 50, 600);
+    ctx.strokeText("Score : "+String(Score)+"/"+String(EndScore), 50, 600);
+    ctx.fillText("Combo : "+String(MaxCombo)+"/"+String(HOnums+LN), 50, 650);
+    ctx.strokeText("Combo : "+String(MaxCombo)+"/"+String(HOnums+LN), 50, 650);
+    ctx.fillText("ACC : "+String(Math.round(Score/EndScore*10000)/100)+"%", 50, 700);
+    ctx.strokeText("ACC : "+String(Math.round(Score/EndScore*10000)/100)+"%", 50, 700);
     ctx.restore();
 }
 function draw_Notes() {
@@ -877,6 +865,3 @@ if(request){
 audio1.volume=0.5;
 audio1.play();
 audio1.pause();
-document.getElementById("osudiv").setAttribute("style","display:none;");
-document.getElementById("audiodiv").setAttribute("style","display: none;");
-document.getElementById("startdiv").setAttribute("style","text-align: center; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0; height: 0px;");
